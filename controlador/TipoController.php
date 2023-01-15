@@ -8,7 +8,7 @@ class TipoController
         $this->connection = $connection;
     }
     //guardar item, cierto si se ha podido insertar
-    function save(Tipo $item):bool
+    function save(Tipo $item): bool
     {
         $this->connection->hset(TipoController::$KEY, $item->getId(), json_encode($item));
         $tempo = $this->connection->hget(TipoController::$KEY, $item->getId());
@@ -22,23 +22,22 @@ class TipoController
     {
         $tempo = $this->connection->hdel(TipoController::$KEY, $id);
         if ($tempo != null)
-            return
-                true;
+            return true;
         else
             return false;
     }
 
     function getAll(): ?array
     {
-        $items=null;
-        
-        $elements=$this->connection->hgetAll(TipoController::$KEY);
-        if($elements!=null){
-            $items= array();
-            foreach ($elements as $json_text){
-                $tempo=new Tipo();
+        $items = null;
+
+        $elements = $this->connection->hgetAll(TipoController::$KEY);
+        if ($elements != null) {
+            $items = array();
+            foreach ($elements as $json_text) {
+                $tempo = new Tipo();
                 $tempo->loadfromJSON($json_text);
-                array_push($items,$tempo);
+                array_push($items, $tempo);
             }
         }
         return $items;
@@ -51,6 +50,6 @@ class TipoController
             $item = new Tipo();
             $item->loadfromJSON($json_text);
         }
-        return $item;        
+        return $item;
     }
 }

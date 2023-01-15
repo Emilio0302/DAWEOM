@@ -1,9 +1,10 @@
 <?php
-class Tipo implements JsonSerializable
+class Localidad implements JsonSerializable
 {
     protected $id;
     protected $name;
-    
+    protected $active;
+
     function __construct()
     {
     }
@@ -12,13 +13,15 @@ class Tipo implements JsonSerializable
         $tempo = json_decode($json, true);
         $this->id = $tempo["id"];
         $this->name = $tempo["name"];
+        $this->active = $tempo["active"];
     }
     public function  jsonSerialize()
     {
         return
             [
                 'id'   => $this->getId(),
-                'name' => $this->getName()
+                'name' => $this->getName(),
+                'active' => $this->isActive()
             ];
     }
     function getName(): string
@@ -29,6 +32,10 @@ class Tipo implements JsonSerializable
     {
         return $this->id;
     }
+    function isActive(): bool
+    {
+        return $this->active;
+    }
     function setName(string $name)
     {
         $this->name = $name;
@@ -36,5 +43,9 @@ class Tipo implements JsonSerializable
     function setId(int $id)
     {
         $this->id = $id;
+    }
+    function setActive(bool $active)
+    {
+        $this->active = $active;
     }
 }

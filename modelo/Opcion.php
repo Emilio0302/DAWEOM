@@ -1,9 +1,9 @@
 <?php
-class Tipo implements JsonSerializable
+class Opcion implements JsonSerializable
 {
     protected $id;
     protected $name;
-    
+
     function __construct()
     {
     }
